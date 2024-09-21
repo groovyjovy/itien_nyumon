@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>4.地図上にもっと多くのピンを立てる</title>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""
+        />
+        <script
+            src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""
+        ></script>
+
+        <!-- Leaflet.markerclusterを読み込み -->
+        <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css"
+        />
+    </head>
+    <body>
+        <div id="map" style="height: 80vh;"></div>
+        <script>
+            // 地図インスタンスを初期化
+            const map = L.map('map', {
+                center: [35.3627808, 138.7307908],
+                zoom: 14,
+            });
+            const backgroundLayer = L.tileLayer(
+                'https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg', // 地理院タイル空中写真
+                {
+                    maxZoom: 17,
+                    attribution:
+                        '<a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル</a>',
+                },
+            );
+            map.addLayer(backgroundLayer);
+
+            L.circle([35.3627808, 138.7307908], {
+                radius: 1000,
+                color: 'red',
+                fillColor: '#ff0000',
+                fillOpacity: 0.3,
+            }).bindPopup('I am circle !').addTo(map);
+
+            L.polyline(
+                [
+                    [35.36, 138.73],
+                    [35.37, 138.73],
+                    [35.38, 138.74],
+                ],
+                { color: 'blue' },
+            )
+                .bindPopup('I am polyline !')
+                .addTo(map);
+            
+            L.polygon(
+                [
+                    [35.36, 138.72],
+                    [35.37, 138.72],
+                    [35.37, 138.73],
+                ],
+                { color: 'green' },
+            )
+                .bindPopup('I am polygon !')
+                .addTo(map);
+        </script>
+    </body>
+</html>
