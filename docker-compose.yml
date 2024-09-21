@@ -1,0 +1,11 @@
+
+services:
+  app:
+    image: node:latest
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/app
+    ports:
+      - 8080:8080
+    working_dir: /app
